@@ -2,7 +2,7 @@
 
 目次
 
-- [[01-laravel-setup.md](documents%2F01-laravel-setup.md)]
+- [01-laravel-setup.md](documents%2F01-laravel-setup.md)
 - [02-set-development-tools.md](documents%2F02-set-development-tools.md)
 - [03-install-breeze.md](documents%2F03-install-breeze.md)
 - [04-add-models.md](documents%2F04-add-models.md)
