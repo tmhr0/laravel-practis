@@ -35,12 +35,13 @@ class CompanyController extends Controller
      */
     public function store(StoreCompanyRequest $request): RedirectResponse
     {
-        if($request->action === 'back') {
+        if ($request->action === 'back') {
             return redirect()->route('companies.index');
         } else {
             $company = new Company();
             $company->fill($request->validated())
                 ->save();
+
             return redirect()->route('companies.index');
         }
     }
