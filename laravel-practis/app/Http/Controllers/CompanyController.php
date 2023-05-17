@@ -49,8 +49,10 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Company $company): View
+    public function show($id): View
     {
+        $company = Company::find($id);
+
         return view('companies.show', compact('company'));
     }
 
@@ -76,10 +78,11 @@ class CompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Company $company): RedirectResponse
+    public function destroy($id): RedirectResponse
     {
+        $company = Company::find($id);
         $company->delete();
 
-        return redirect()->route('companies.index');
+        return redirect()->route('companies.index', compact('company'));
     }
 }
