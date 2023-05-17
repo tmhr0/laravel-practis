@@ -9,13 +9,14 @@
             <div class="container">
                 <div class="card">
                     <h1 class="card-header">会社 一覧ページ</h1>
-                    <br>
                     <table class="table table-striped">
                         <thead>
                         <tr>
                             <th>ID</th>
                             <th>会社名</th>
                             <th>作成日</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
