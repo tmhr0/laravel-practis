@@ -52,27 +52,32 @@ class CompanyController extends Controller
     public function show($id): View
     {
         $company = Company::find($id);
-
         return view('companies.show', compact('company'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Company $company): View
+    public function edit($id): View
     {
+        $company = Company::find($id);
         return view('companies.edit', compact('company'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCompanyRequest $request, Company $company): RedirectResponse
+    public function update(UpdateCompanyRequest $request, $id): RedirectResponse
     {
-        $company->fill($request->validated())
+        if($request->action === 'back') {
+            return redirect()->route('companies.index');
+        } else {
+            $company = Company::find($id);
+            $company->fill($request->validated())
             ->save();
 
-        return redirect()->route('companies.show', compact('company'));
+        return redirect()->route('companies.index', compact('company'));
+    }
     }
 
     /**
