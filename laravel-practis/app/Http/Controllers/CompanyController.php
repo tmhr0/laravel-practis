@@ -49,11 +49,10 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id): View
+    public function show(string $id): View
     {
-        $company = Company::find($id);
 //        return view('companies.show', compact('company'));
-        return view('companies.show', ['company' => $company]);
+        return view('companies.show', ['company' => Company::findOrFail($id)]);
     }
 
     /**
@@ -61,8 +60,7 @@ class CompanyController extends Controller
      */
     public function edit($id): View
     {
-        $company = Company::find($id);
-        return view('companies.edit', compact('company'));
+        return view('companies.edit', ['company' => Company::findOrFail($id)]);
     }
 
     /**
@@ -70,15 +68,15 @@ class CompanyController extends Controller
      */
     public function update(UpdateCompanyRequest $request, $id): RedirectResponse
     {
-        if($request->action === 'back') {
+        if ($request->action === 'back') {
             return redirect()->route('companies.index');
         } else {
             $company = Company::find($id);
             $company->fill($request->validated())
-            ->save();
+                ->save();
 
-        return redirect()->route('companies.index', compact('company'));
-    }
+            return redirect()->route('companies.index', compact('company'));
+        }
     }
 
     /**
