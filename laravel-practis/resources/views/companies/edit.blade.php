@@ -25,9 +25,9 @@
                                     <button type="submit" class="btn btn-primary" name='action' value='edit'>
                                         {{ __('更新') }}
                                     </button>
-                                    <button type="submit" class="btn btn-danger" name='action' value='back'>
+                                    <a href="{{ route('companies.index') }}">
                                         {{ __('戻る') }}
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </form>

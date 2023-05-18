@@ -29,12 +29,12 @@
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="button" class="btn btn-primary" onclick="location.href='{{ route('companies.edit', $company->id) }}'">
+                                <a href='{{ route('companies.edit', $company->id) }}'>
                                     {{ __('編集') }}
-                                </button>
-                                <button type="button" class="btn btn-danger" onclick="history.back()">
+                                </a>
+                                <a href="{{ route('companies.index') }}" >
                                     {{ __('戻る') }}
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
