@@ -25,7 +25,7 @@
                                     <button type="submit" class="btn btn-primary" name='action' value='edit'>
                                         {{ __('更新') }}
                                     </button>
-                                    <a href="{{ route('companies.index') }}">
+                                    <a href='{{ route('companies.show', $company->id) }}'>
                                         {{ __('戻る') }}
                                     </a>
                                 </div>
