@@ -35,56 +35,48 @@ class CompanyController extends Controller
      */
     public function store(StoreCompanyRequest $request): RedirectResponse
     {
-        if ($request->action === 'back') {
-            return redirect()->route('companies.index');
-        } else {
             $company = new Company();
             $company->fill($request->validated())
                 ->save();
 
             return redirect()->route('companies.index');
-        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id): View
+    public function show(string $Company): View
     {
 //        return view('companies.show', compact('company'));
-        return view('companies.show', ['company' => Company::findOrFail($id)]);
+        return view('companies.show', ['company' => Company::findOrFail($Company)]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id): View
+    public function edit(string $Company): View
     {
-        return view('companies.edit', ['company' => Company::findOrFail($id)]);
+        return view('companies.edit', ['company' => Company::findOrFail($Company)]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCompanyRequest $request, $id): RedirectResponse
+    public function update(UpdateCompanyRequest $request, string $Company): RedirectResponse
     {
-        if ($request->action === 'back') {
-            return redirect()->route('companies.index');
-        } else {
-            $company = Company::find($id);
-            $company->fill($request->validated())
-                ->save();
+        $company = Company::find($Company);
+        $company->fill($request->validated())
+            ->save();
 
-            return redirect()->route('companies.index', compact('company'));
-        }
+        return redirect()->route('companies.index', compact('company'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id): RedirectResponse
+    public function destroy(string $Company): RedirectResponse
     {
-        $company = Company::find($id);
+        $company = Company::find($Company);
         $company->delete();
 
         return redirect()->route('companies.index', compact('company'));
