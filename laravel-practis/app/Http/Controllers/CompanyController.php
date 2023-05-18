@@ -45,26 +45,24 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $Company): View
+    public function show(Company $company): View
     {
-//        return view('companies.show', compact('company'));
-        return view('companies.show', ['company' => Company::findOrFail($Company)]);
+        return view('companies.show', compact('company'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $Company): View
+    public function edit(Company $company): View
     {
-        return view('companies.edit', ['company' => Company::findOrFail($Company)]);
+        return view('companies.edit', compact('company'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCompanyRequest $request, string $Company): RedirectResponse
+    public function update(UpdateCompanyRequest $request,Company $company): RedirectResponse
     {
-        $company = Company::find($Company);
         $company->fill($request->validated())
             ->save();
 
@@ -74,9 +72,8 @@ class CompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $Company): RedirectResponse
+    public function destroy(Company $company): RedirectResponse
     {
-        $company = Company::find($Company);
         $company->delete();
 
         return redirect()->route('companies.index', compact('company'));
