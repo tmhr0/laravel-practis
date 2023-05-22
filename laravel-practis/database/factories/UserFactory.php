@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Company;
+use App\Models\Section;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -21,6 +22,9 @@ class UserFactory extends Factory
         return [
             'company_id' => function () {
                 return Company::query()->inRandomOrder()->first()->id;
+            },
+            'section_id' => function () {
+                return Section::query()->inRandomOrder()->first()->id;
             },
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
