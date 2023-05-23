@@ -16,13 +16,13 @@
                     </thead>
                     <tbody>
                     @if(isset($sections))
-                        @foreach ($sections as $section)
+                        @foreach ($company->sections as $section)
                             <tr>
                                 <td>{{ $section->id }}</td>
                                 <td>{{ $section->name }}</td>
                                 <td>{{ $section->created_at }}</td>
                                 <td>
-                                    <a href="{{ route('sections.show', ['company' => $company->id, 'section' => $section->id]) }}">
+                                    <a href="{{ route('sections.show', ['company' => $section->company_id, 'section' => $section->id]) }}">
                                         <div type="button" class="btn btn-primary">
                                             {{ __('詳細') }}
                                         </div>

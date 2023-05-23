@@ -7,16 +7,15 @@ use App\Models\Company;
 use App\Models\Section;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use phpDocumentor\Reflection\Types\Collection;
 
 class SectionController extends Controller
 {
-    public function index($id): View
+    public function index(Company $company): View
     {
-        $sections = Section::query()
-            ->paginate()
-            ->withQueryString();
+        $sections = $company->sections();
 
-        $company = Company::find($id);
+        $company = Company::find($company);
 
         return view('companies.sections.index', compact('sections', 'company'));
     }
@@ -24,15 +23,15 @@ class SectionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(int $id): View
+    public function create(Company $company): View
     {
-        $company = Company::findOrFail($id);
+        $company = Company::findOrFail($company);
 
         return view('companies.sections.create', compact('company'));
 
     }
 
-    public function store(StoreSectionRequest $request, $company): RedirectResponse
+    public function store(StoreSectionRequest $request,Company $company): RedirectResponse
     {
         $section = new Section();
         $company = Company::findOrFail($company);
@@ -45,19 +44,18 @@ class SectionController extends Controller
         return new RedirectResponse(route('companies.index'));
     }
 
-    public function show($section): View
+    public function show(Section $section, Company $company): View
     {
-        $section = Section::findOrFail($section);
+        $section = $company->sections()->findOrFail($section->id);
 
-        return view('companies.sections.show', compact('section'));
-
+        return view('companies.sections.show', compact('section', 'company'));
     }
 
-
-    public function edit(Section $section): View
+    public function edit(Section $section, Company $company): View
     {
+        $company = Company::findOrFail($company);
         $section = Section::findOrFail($section);
 
-        return view('companies.sections.show', compact('section'));
+        return view('companies.sections.edit', compact('section', 'company'));
     }
 }
