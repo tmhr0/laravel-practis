@@ -26,9 +26,11 @@
                                 <button type="submit" class="btn btn-primary" name='action' value='add'>
                                     {{ __('追加') }}
                                 </button>
-                                <button type="submit" class="btn btn-danger" name='action' value='back'>
-                                    {{ __('戻る') }}
-                                </button>
+                                <a href="/companies">
+                                    <div type="button" class="btn btn-danger">
+                                        {{ __('戻る') }}
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </form>
