@@ -4,7 +4,11 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
         <div class="container">
             <div class="card">
-                <h1 class="card-header">部署情報 一覧ページ</h1>
+
+                <h1 class="card-header">
+                    会社名 {{ $company->name }}<br>
+                        部署情報 一覧ページ
+                </h1>
                 <table class="table table-striped">
                     <thead>
                     <tr>
