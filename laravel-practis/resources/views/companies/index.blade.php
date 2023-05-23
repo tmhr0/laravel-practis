@@ -28,7 +28,7 @@
                                     <td>{{ $company->name }}</td>
                                     <td>{{ $company->created_at }}</td>
                                     <td>
-                                        <a href="{{ route('companies.sections.create', ['company' => $company->id]) }}">
+                                        <a href="{{ route('sections.create', ['company' => $company->id]) }}">
                                             <div type="button" class="btn btn-primary">
                                                 {{ __('部署登録') }}
                                             </div>

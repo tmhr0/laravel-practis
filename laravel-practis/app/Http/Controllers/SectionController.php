@@ -10,13 +10,15 @@ use Illuminate\Http\RedirectResponse;
 
 class SectionController extends Controller
 {
-    public function index(): View
+    public function index($id): View
     {
         $sections = Section::query()
             ->paginate()
             ->withQueryString();
 
-        return view('companies.sections.index', compact('sections'));
+        $company = Company::find($id);
+
+        return view('companies.sections.index', compact('sections', 'company'));
     }
 
     /**
@@ -43,13 +45,19 @@ class SectionController extends Controller
         return new RedirectResponse(route('companies.index'));
     }
 
-    public function show(Section $section): View
+    public function show($section): View
     {
+        $section = Section::findOrFail($section);
+
         return view('companies.sections.show', compact('section'));
+
     }
+
 
     public function edit(Section $section): View
     {
-        return view('companies.sections.edit', compact('section'));
+        $section = Section::findOrFail($section);
+
+        return view('companies.sections.show', compact('section'));
     }
 }

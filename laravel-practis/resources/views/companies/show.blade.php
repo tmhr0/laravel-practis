@@ -35,12 +35,11 @@
                                     </div>
                                 </a>
 
-                                <a href="{{ route('companies.sections.index', $company->id) }}">
+                                <a href="{{ route('sections.index', $company->id) }}">
                                     <div type="button" class="btn btn-primary">
                                     {{ __('部署情報を確認する') }}
                                     </div>
                                 </a>
-
                                 <a href="{{ route('companies.index') }}" >
                                     <div type="button" class="btn btn-danger">
                                     {{ __('戻る') }}
