@@ -45,11 +45,11 @@ class SectionController extends Controller
 
     public function show(Section $section): View
     {
-      return view('companies.sections.show', compact('section'));
+        return view('companies.sections.show', compact('section'));
     }
 
     public function edit(Section $section): View
     {
-      return view('companies.sections.edit', compact('section'));
+        return view('companies.sections.edit', compact('section'));
     }
 }

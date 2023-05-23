@@ -35,11 +35,11 @@ class CompanyController extends Controller
      */
     public function store(StoreCompanyRequest $request): RedirectResponse
     {
-            $company = new Company();
-            $company->fill($request->validated())
-                ->save();
+        $company = new Company();
+        $company->fill($request->validated())
+            ->save();
 
-            return redirect()->route('companies.index');
+        return redirect()->route('companies.index');
     }
 
     /**
@@ -61,7 +61,7 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCompanyRequest $request,Company $company): RedirectResponse
+    public function update(UpdateCompanyRequest $request, Company $company): RedirectResponse
     {
         $company->fill($request->validated())
             ->save();
