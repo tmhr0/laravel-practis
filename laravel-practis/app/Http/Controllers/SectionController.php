@@ -7,15 +7,12 @@ use App\Models\Company;
 use App\Models\Section;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use phpDocumentor\Reflection\Types\Collection;
 
 class SectionController extends Controller
 {
     public function index(Company $company): View
     {
-        $sections = $company->sections();
-
-        $company = Company::find($company);
+        $sections = $company->sections;
 
         return view('companies.sections.index', compact('sections', 'company'));
     }
