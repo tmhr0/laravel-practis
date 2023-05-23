@@ -7,7 +7,7 @@
     <div class="container">
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                @include('companies/message')
+                @include('layouts.message')
                 <div class="card-header">会社 新規作成ページ</div>
                 <div class="card-body">
                     <form action="{{ route('companies.store') }}" method="POST">

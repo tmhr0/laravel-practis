@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                @include('companies/message')
+                @include('layouts.message')
                 <div class="card">
                     <div class="card-header">会社情報　編集</div>
                     <div class="card-body">
