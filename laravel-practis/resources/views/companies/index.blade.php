@@ -17,6 +17,7 @@
                             <th>作成日</th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -27,9 +28,17 @@
                                     <td>{{ $company->name }}</td>
                                     <td>{{ $company->created_at }}</td>
                                     <td>
+                                        <a href="{{ route('companies.sections.create', ['company' => $company->id]) }}">
+                                            <div type="button" class="btn btn-primary">
+                                                {{ __('部署登録') }}
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td>
                                         <a href="/companies/{{ $company->id }}">
-                                            <button type="button" class="btn btn-primary">{{ __('詳細') }}
-                                            </button>
+                                            <div type="button" class="btn btn-primary">
+                                                {{ __('詳細') }}
+                                            </div>
                                         </a>
                                     </td>
                                     <td>
@@ -42,7 +51,6 @@
                                             </button>
                                         </form>
                                     </td>
-
                                 </tr>
                             @endforeach
                         @endif
