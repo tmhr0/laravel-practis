@@ -10,11 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('user_section', function (Blueprint $table) {
-            $table->comment('userとsectionの中間テーブル');
+        Schema::create('section_user', function (Blueprint $table) {
+            $table->comment('sectionとuserの中間テーブル');
             $table->id()->comment('ID');
             $table->foreignIdFor(\App\Models\Section::class)->comment('部署ID');
+            $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
             $table->foreignIdFor(\App\Models\User::class)->comment('ユーザーID');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_section');
+        Schema::dropIfExists('section_user');
     }
 };

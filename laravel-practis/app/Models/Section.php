@@ -15,6 +15,14 @@ class Section extends Model
     ];
 
     /**
+     * 部署情報を持つユーザー
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
+    }
+
+    /**
      * @return BelongsTo
      */
     public function company(): BelongsTo

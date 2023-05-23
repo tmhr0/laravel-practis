@@ -44,6 +44,14 @@ class User extends Authenticatable
     ];
 
     /**
+     * userに所属する部署データを取得
+     */
+    public function sections()
+    {
+        return $this->belongsToMany('App\Section');
+    }
+
+    /**
      * @return BelongsTo
      */
     public function company(): BelongsTo
