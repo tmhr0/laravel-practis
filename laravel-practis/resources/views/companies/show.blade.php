@@ -29,11 +29,22 @@
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <a href='{{ route('companies.edit', $company->id) }}'>
+                                <a href="{{ route('companies.edit', $company->id) }}">
+                                    <div type="button" class="btn btn-primary">
                                     {{ __('編集') }}
+                                    </div>
                                 </a>
+
+                                <a href="{{ route('companies.sections.index', $company->id) }}">
+                                    <div type="button" class="btn btn-primary">
+                                    {{ __('部署情報を確認する') }}
+                                    </div>
+                                </a>
+
                                 <a href="{{ route('companies.index') }}" >
+                                    <div type="button" class="btn btn-danger">
                                     {{ __('戻る') }}
+                                    </div>
                                 </a>
                             </div>
                         </div>
