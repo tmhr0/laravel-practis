@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,10 +27,6 @@ Route::get('/companies', function () {
     return view('company');
 })->middleware(['auth', 'verified'])->name('company');
 
-Route::get('companies.sections', function () {
-    return view('/companies/sections');
-})->middleware(['auth', 'verified'])->name('company.section');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -37,6 +34,12 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('companies', \App\Http\Controllers\CompanyController::class);
     Route::resource('companies.sections', \App\Http\Controllers\SectionController::class);
+
+    Route::post('/companies/{id}/sections', [SectionController::class, 'store'])->name('sections.store');
+    Route::get('/companies/{company}/sections/{section}/edit', [SectionController::class, 'edit'])
+        ->name('sections.edit');
+    Route::put('/companies/{company}/sections/{id}', [SectionController::class, 'update'])
+        ->name('sections.update');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
