@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSectionRequest;
+use App\Http\Requests\UpdateSectionRequest;
 use App\Models\Company;
 use App\Models\Section;
 use Illuminate\Contracts\View\View;
@@ -37,22 +38,28 @@ class SectionController extends Controller
             'company_id' => $company->id,
             'name' => $request->name
         ]);
-
         return new RedirectResponse(route('companies.index'));
     }
-
-    public function show(Section $section, Company $company): View
+    public function show($company_id,$section_id): View
     {
-        $section = $company->sections()->findOrFail($section->id);
-
-        return view('companies.sections.show', compact('section', 'company'));
+        $company = Company::findOrFail($company_id);
+        $section = Section::findOrFail($section_id);
+//        dd($company,$section);
+        return view('companies.sections.show', compact('company','section'));
     }
 
-    public function edit(Section $section, Company $company): View
+    public function edit($company, $section): View
     {
         $company = Company::findOrFail($company);
         $section = Section::findOrFail($section);
 
-        return view('companies.sections.edit', compact('section', 'company'));
+        return view('companies.sections.edit', compact( 'company','section'));
+    }
+    public function update(UpdateSectionRequest $request,$section): RedirectResponse
+    {
+        $section->fill($request->validated())
+            ->save();
+
+        return new RedirectResponse('companies.sections.index', compact('section'));
     }
 }
