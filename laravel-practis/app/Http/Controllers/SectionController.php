@@ -22,7 +22,7 @@ class SectionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create($id): View
+    public function create(int $id): View
     {
         $company = Company::findOrFail($id);
 

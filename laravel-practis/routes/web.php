@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('companies.sections', \App\Http\Controllers\SectionController::class);
 
     Route::post('/companies/{id}/sections', [SectionController::class, 'store'])->name('sections.store');
+    Route::get('/companies/{company}/sections/{section}/show', [SectionController::class, 'show'])
+        ->name('sections.show');
     Route::get('/companies/{company}/sections/{section}/edit', [SectionController::class, 'edit'])
         ->name('sections.edit');
     Route::put('/companies/{company}/sections/{id}', [SectionController::class, 'update'])
