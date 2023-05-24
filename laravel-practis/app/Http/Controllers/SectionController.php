@@ -46,11 +46,11 @@ class SectionController extends Controller
     {
         return view('companies.sections.edit', compact( 'company','section'));
     }
-    public function update(UpdateSectionRequest $request, Section $section): RedirectResponse
+    public function update(UpdateSectionRequest $request, Company $company, Section $section): RedirectResponse
     {
         $section->fill($request->validated())
             ->save();
 
-        return new RedirectResponse('companies.sections.index', compact('section'));
+        return redirect()->route('sections.index', compact('company','section'));
     }
 }
