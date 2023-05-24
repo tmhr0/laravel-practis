@@ -23,16 +23,15 @@ class SectionController extends Controller
      */
     public function create(Company $company): View
     {
-        $company = Company::findOrFail($company);
+        $company = Company::find($company);
 
         return view('companies.sections.create', compact('company'));
-
     }
 
     public function store(StoreSectionRequest $request,Company $company): RedirectResponse
     {
         $section = new Section();
-        $company = Company::findOrFail($company);
+        $company = Company::find($company);
 
         $section->create([
             'company_id' => $company->id,
@@ -40,22 +39,19 @@ class SectionController extends Controller
         ]);
         return new RedirectResponse(route('companies.index'));
     }
-    public function show($company_id,$section_id): View
+
+    public function show(Company $company_id,Section $section_id): View
     {
-        $company = Company::findOrFail($company_id);
-        $section = Section::findOrFail($section_id);
-//        dd($company,$section);
+        $company = Company::find($company_id);
+        $section = Section::find($section_id);
         return view('companies.sections.show', compact('company','section'));
     }
 
-    public function edit($company, $section): View
+    public function edit(Company $company,Section $section): View
     {
-        $company = Company::findOrFail($company);
-        $section = Section::findOrFail($section);
-
         return view('companies.sections.edit', compact( 'company','section'));
     }
-    public function update(UpdateSectionRequest $request,$section): RedirectResponse
+    public function update(UpdateSectionRequest $request, Section $section): RedirectResponse
     {
         $section->fill($request->validated())
             ->save();
