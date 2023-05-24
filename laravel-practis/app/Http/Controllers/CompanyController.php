@@ -47,7 +47,8 @@ class CompanyController extends Controller
      */
     public function show(Company $company): View
     {
-        return view('companies.show', compact('company'));
+        $users = $company->users;
+        return view('companies.show', compact('company', 'users'));
     }
 
     /**

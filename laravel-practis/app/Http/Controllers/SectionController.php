@@ -26,7 +26,7 @@ class SectionController extends Controller
         return view('companies.sections.create', compact('company'));
     }
 
-    public function store(StoreSectionRequest $request,Company $company): RedirectResponse
+    public function store(StoreSectionRequest $request, Company $company): RedirectResponse
     {
         $section = new Section();
 
@@ -37,20 +37,21 @@ class SectionController extends Controller
         return new RedirectResponse(route('companies.index'));
     }
 
-    public function show(Company $company,Section $section): View
+    public function show(Company $company, Section $section): View
     {
-        return view('companies.sections.show', compact('company','section'));
+        return view('companies.sections.show', compact('company', 'section'));
     }
 
-    public function edit(Company $company,Section $section): View
+    public function edit(Company $company, Section $section): View
     {
-        return view('companies.sections.edit', compact( 'company','section'));
+        return view('companies.sections.edit', compact('company', 'section'));
     }
+
     public function update(UpdateSectionRequest $request, Company $company, Section $section): RedirectResponse
     {
         $section->fill($request->validated())
             ->save();
 
-        return redirect()->route('sections.index', compact('company','section'));
+        return redirect()->route('sections.index', compact('company', 'section'));
     }
 }
