@@ -26,7 +26,7 @@
                                 <td>{{ $section->name }}</td>
                                 <td>{{ $section->created_at }}</td>
                                 <td>
-                                    <a href="{{ route('sections.show', ['company' => $section->company_id, 'section' => $section->id]) }}">
+                                    <a href="{{ route('sections.show', [$section->company_id, $section->id]) }}">
                                         <div type="button" class="btn btn-primary">
                                             {{ __('詳細') }}
                                         </div>
