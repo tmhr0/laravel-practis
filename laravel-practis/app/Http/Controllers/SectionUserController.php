@@ -13,6 +13,6 @@ class SectionUserController extends Controller
     public function create(): View
     {
 
-        return view('companies.sections.users.create ');
+        return view('companies.sections.users.create');
     }
 }
