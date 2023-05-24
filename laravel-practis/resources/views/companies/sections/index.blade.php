@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <div class="py-12">
@@ -7,7 +10,7 @@
 
                 <h1 class="card-header">
                     会社名 {{ $company->name }}<br>
-                        部署情報 一覧ページ
+                    部署情報 一覧ページ
                 </h1>
                 <table class="table table-striped">
                     <thead>
@@ -41,3 +44,4 @@
         </div>
     </div>
 </div>
+@endsection

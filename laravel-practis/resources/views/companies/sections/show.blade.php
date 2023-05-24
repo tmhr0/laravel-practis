@@ -31,10 +31,10 @@
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <a href='{{ route('companies.sections.edit', $section->id) }}'>
+                                <a href="{{ route('sections.edit', [$section->company_id, $section->id]) }}">
                                     {{ __('編集') }}
                                 </a>
-                                <a href="{{ route('companies.index') }}">
+                                <a href="{{ route('sections.index', [$section->company_id, $section->id]) }}">
                                     {{ __('戻る') }}
                                 </a>
                             </div>
