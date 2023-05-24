@@ -23,15 +23,12 @@ class SectionController extends Controller
      */
     public function create(Company $company): View
     {
-        $company = Company::find($company);
-
         return view('companies.sections.create', compact('company'));
     }
 
     public function store(StoreSectionRequest $request,Company $company): RedirectResponse
     {
         $section = new Section();
-        $company = Company::find($company);
 
         $section->create([
             'company_id' => $company->id,
@@ -40,10 +37,8 @@ class SectionController extends Controller
         return new RedirectResponse(route('companies.index'));
     }
 
-    public function show(Company $company_id,Section $section_id): View
+    public function show(Company $company,Section $section): View
     {
-        $company = Company::find($company_id);
-        $section = Section::find($section_id);
         return view('companies.sections.show', compact('company','section'));
     }
 
