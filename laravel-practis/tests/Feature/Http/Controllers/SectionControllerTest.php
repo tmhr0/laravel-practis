@@ -65,6 +65,17 @@ class SectionControllerTest extends TestCase
 
         // 登録データが存在しているかを確認する
         $this->assertDatabaseHas('sections', ['company_id' => $company, 'name' => $section_name]);
+
+        // バリデーションの表示確認
+        $this->actingAs($this->user)->post($url, ['name' => null]);
+
+        $validation = '空欄での登録はできません。';
+        $this->get(route('sections.create', $this->company->first()->id))->assertSee($validation);
+
+        $this->actingAs($this->user)->post($url, ['name' => str_repeat('a', 31)]);
+
+        $validation = 'nameは、30文字以下で指定してください。';
+        $this->get(route('sections.create', $this->company->first()->id))->assertSee($validation);
     }
 
     public function test_show(): void
