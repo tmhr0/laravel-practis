@@ -52,26 +52,26 @@ class SectionControllerTest extends TestCase
     public function test_store()
     {
         $company = $this->company->first()->id;
-        $section_name = $this->faker->word.'部';
+        $section_name = $this->faker->word . '部';
 
         $url = route('sections.store', ['company' => $this->company->first()->id, 'section' => $this->section->first()->id]);
 
         // ゲストのときは、loginページにリダイレクトされる
-        $this->post($url, ['company_id'=>$company,'name' => $section_name,])->assertRedirect(route('login'));
+        $this->post($url, ['company_id' => $company, 'name' => $section_name])->assertRedirect(route('login'));
 
-        $response = $this->actingAs($this->user)->post($url, ['name' => $section_name,]);
+        $response = $this->actingAs($this->user)->post($url, ['name' => $section_name]);
 
         $response->assertStatus(302);
 
         // 登録データが存在しているかを確認する
-        $this->assertDatabaseHas('sections', ['company_id' => $company,'name' => $section_name,]);
+        $this->assertDatabaseHas('sections', ['company_id' => $company, 'name' => $section_name]);
     }
 
     public function test_show(): void
     {
         $url = route('sections.show', ['company' => $this->company->first()->id, 'section' => $this->section->first()->id]);
 
-        // Guest のときは、login にリダイレクトされる
+        // ゲストのときは、loginページにリダイレクトされる
         $this->get($url)->assertRedirect(route('login'));
 
         $response = $this->actingAs($this->user)->get($url);
@@ -82,12 +82,13 @@ class SectionControllerTest extends TestCase
     {
         $url = route('sections.edit', ['company' => $this->company->first()->id, 'section' => $this->section->first()->id]);
 
-        // Guest のときは、login にリダイレクトされる
+        // ゲストのときは、loginページにリダイレクトされる
         $this->get($url)->assertRedirect(route('login'));
 
         $response = $this->actingAs($this->user)->get($url);
         $response->assertStatus(200);
     }
+
     public function test_update()
     {
         // ゲストのときは、loginページにリダイレクトされる
@@ -95,17 +96,15 @@ class SectionControllerTest extends TestCase
         $section = $company->sections->first();
 
         $url = route('sections.update', ['company' => $company->id, 'section' => $section->id]);
-        $section_name = $this->faker->word.'部';
+        $section_name = $this->faker->word . '部';
 
         // ゲストのときは、loginページにリダイレクトされる
-        $this->put($url, [
-            'name' => $section_name,
-        ])->assertRedirect(route('login'));
+        $this->put($url, ['name' => $section_name,])->assertRedirect(route('login'));
 
         $this->actingAs($this->user)
             ->put($url, ['name' => $section_name,])->assertStatus(302);;
 
         // 登録データが存在しているかを確認する
-        $this->assertDatabaseHas('sections', ['name' => $section_name,]);
+        $this->assertDatabaseHas('sections', ['name' => $section_name]);
     }
 }
