@@ -6,6 +6,7 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\Company;
 use App\Models\Section;
 use App\Models\User;
+use App\Rules\SectionUniqueRule;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -76,6 +77,11 @@ class SectionControllerTest extends TestCase
 
         $validation = 'nameは、30文字以下で指定してください。';
         $this->get(route('sections.create', $this->company->first()->id))->assertSee($validation);
+
+        $this->actingAs($this->user)->post($url, ['name' => $section_name]);
+
+        $validation = 'nameの値は既に存在しています。';
+        $this->get(route('sections.create', $this->company->first()->id))->assertSee($validation);
     }
 
     public function test_show(): void
@@ -127,6 +133,13 @@ class SectionControllerTest extends TestCase
         $this->actingAs($this->user)->put($url, ['name' => str_repeat('a', 31)]);
 
         $validation = 'nameは、30文字以下で指定してください。';
+        $this->get(route('sections.edit', ['company' => $this->company->first()->id, 'section' => $this->section->first()->id]))->assertSee($validation);
+
+
+        //エラー箇所
+        $this->actingAs($this->user)->put($url, ['name' => $section_name]);
+
+        $validation = 'その部署名は既に登録済みです。';
         $this->get(route('sections.edit', ['company' => $this->company->first()->id, 'section' => $this->section->first()->id]))->assertSee($validation);
     }
 }

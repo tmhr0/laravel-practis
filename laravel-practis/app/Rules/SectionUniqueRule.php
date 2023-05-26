@@ -36,7 +36,7 @@ class SectionUniqueRule implements ValidationRule
             ->exists();
 
         if ($sectionExists) {
-            $fail('その部署名はすでに登録済みです。');
+            $fail('その部署名は既に登録済みです。');
         }
     }
 }
