@@ -39,7 +39,8 @@ class SectionController extends Controller
 
     public function show(Company $company, Section $section): View
     {
-        return view('companies.sections.show', compact('company', 'section'));
+        $users = $company->users;
+        return view('companies.sections.show', compact('company', 'section', 'users'));
     }
 
     public function edit(Company $company, Section $section): View

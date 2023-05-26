@@ -47,40 +47,9 @@
                                     </div>
                                 </a>
                             </div>
-                            <h3>所属ユーザー一覧</h3>
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>ユーザー名</th>
-                                    <th>部署</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @if(isset($users))
-                                    {{--                                @foreach ($section->users as $user)--}}
-                                    @foreach ($company->users as $user)
-                                        <tr>
-                                            <td>{{ $user->id }}</td>
-                                            <td>{{ $user->name }}</td>
-                                            <th>{{ $user->name }}</th>
-                                            <th>
-                                                <a href="{{ route('companies.index') }}">
-                                                    <div type="button" class="btn btn-primary">
-                                                        {{ __('部署登録') }}
-                                                    </div>
-                                                </a>
-                                            </th>
-                                        </tr>
-                                    @endforeach
-                                @endif
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 @endsection
