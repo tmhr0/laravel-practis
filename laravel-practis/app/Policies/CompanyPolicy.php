@@ -19,11 +19,11 @@ class CompanyPolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the user can edit the model.
      */
-    public function create(User $user, Company $company): bool
+    public function edit(User $user, Company $company): bool
     {
-        //
+        return $user->company->id === $company->id;
     }
 
     /**
@@ -31,15 +31,7 @@ class CompanyPolicy
      */
     public function update(User $user, Company $company): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can edit the model.
-     */
-    public function edit(User $user, Company $company): bool
-    {
-        //
+        return $user->company->id === $company->id;
     }
 
     /**
@@ -47,6 +39,6 @@ class CompanyPolicy
      */
     public function delete(User $user, Company $company): bool
     {
-        //
+        return $user->company->id === $company->id;
     }
 }
