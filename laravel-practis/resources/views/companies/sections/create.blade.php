@@ -8,7 +8,7 @@
         <div class="py-12">
             @include('layouts/message')
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div class="card-header">会社　部署情報　登録ページ</div>
+                <div class="card-header">{{ __('会社　部署情報　登録ページ') }}</div>
                 <div class="card-body">
                     <form action="{{ route('sections.store', ['company' => $company->id]) }}" method="POST">
                         @csrf

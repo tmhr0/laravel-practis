@@ -8,7 +8,7 @@
             <div class="col-md-8">
                 @include('layouts.message')
                 <div class="card">
-                    <div class="card-header">会社情報　編集</div>
+                    <div class="card-header">{{ __('会社情報　編集') }}</div>
                     <div class="card-body">
                         <form action="/companies/{{ $company->id }}/sections/{{ $section->id }}/" method="post">
                             @csrf
