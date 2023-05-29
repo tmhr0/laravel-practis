@@ -8,7 +8,7 @@
             <div class="col-md-8">
                 @include('layouts/message')
                 <div class="card">
-                    <h2 class="card-header">部署情報　詳細</h2>
+                    <h2 class="card-header">{{ __('部署情報　詳細') }}</h2>
                     <div class="card-body">
                         <H2>{{ $company->name }}</H2>
                         <div class="form-group row">
@@ -40,16 +40,16 @@
                                 </a>
                             </div>
                         </div>
-                        <h3>{{ $section->name }} ユーザー登録 </h3>
+                        <h3>{{ $section->name }} {{ __('ユーザー登録') }} </h3>
 
                         <form action="/companies/{{ $company->id }}/sections/{{ $section->id }}/users/" method="POST">
                             @csrf
                             <table class="table table-striped">
                                 <tr>
                                     <td>
-                                        <label for="user_id">ユーザー選択</label>
+                                        <label for="user_id">{{ __('ユーザー選択') }}</label>
                                         <select name="user_id" id="user_id" class="form-control" required>
-                                            <option value="" disabled selected>選択してください。</option>
+                                            <option value="" disabled selected>{{ __('選択してください。') }}</option>
                                             @foreach ($company->users as $user)
                                                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                                             @endforeach
@@ -61,12 +61,12 @@
                                 {{ __('追加する') }}
                             </button>
                         </form>
-                        <h3>所属者一覧</h3>
+                        <h3>{{ __('所属者一覧') }}</h3>
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
+                                <th>{{ __('ID') }}</th>
+                                <th>{{ __('名前') }}</th>
                                 <th></th>
                             </tr>
                             </thead>
