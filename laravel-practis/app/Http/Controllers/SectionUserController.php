@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSectionUserRequest;
 use App\Models\Company;
 use App\Models\Section;
 use App\Models\User;
-use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 class SectionUserController extends Controller
 {
-    public function create(): View
+    public function store(StoreSectionUserRequest $request, Company $company, Section $section): RedirectResponse
     {
 
-        return view('companies.sections.users.create');
+        $section->users()->attach($request->user_id);
+
+        $company = $section->company;
+
+        return redirect()->route('sections.show', compact('company', 'section'));
     }
 }

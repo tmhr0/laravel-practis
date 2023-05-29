@@ -9,7 +9,6 @@
                 <div class="card">
                     <h2 class="card-header">部署情報　詳細</h2>
                     <div class="card-body">
-                        @csrf
                         <H2>{{ $company->name }}</H2>
                         <div class="form-group row">
                             <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('ID') }}</label>
@@ -24,7 +23,8 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('登録日時') }}</label>
+                            <label for="name"
+                                   class="col-md-4 col-form-label text-md-right">{{ __('登録日時') }}</label>
                             <div class="col-md-6 input-group-text">
                                 {{ $section->created_at }}
                             </div>
@@ -39,6 +39,44 @@
                                 </a>
                             </div>
                         </div>
+                        <h3>{{ $section->name }} ユーザー登録 </h3>
+
+                        <form action="/companies/{{ $company->id }}/sections/{{ $section->id }}/users/" method="POST">
+                            @csrf
+                            <table class="table table-striped">
+                                <tr>
+                                    <td>
+                                        <label for="user_id">ユーザー選択</label>
+                                        <select name="user_id" id="user_id" class="form-control" required>
+                                            <option value="" disabled selected>選択してください。</option>
+                                            @foreach ($company->users as $user)
+                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    <td>
+                                <tr>
+                            </table>
+                            <button type="submit" class="btn btn-primary" name='action' value='edit'>
+                                {{ __('追加する') }}
+                            </button>
+                        </form>
+                        <h3>所属者一覧</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($section->users as $user)
+                                <tr>
+                                    <td>{{ $user->id }}</td>
+                                    <td>{{ $user->name }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
