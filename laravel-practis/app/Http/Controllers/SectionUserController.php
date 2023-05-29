@@ -20,4 +20,12 @@ class SectionUserController extends Controller
 
         return redirect()->route('sections.show', compact('company', 'section'));
     }
+    public function destroy(Company $company, Section $section, User $user)
+    {
+        $section->users()->detach($user->id);
+
+        $company = $section->company;
+
+        return redirect()->route('sections.show', compact('company', 'section'));
+    }
 }

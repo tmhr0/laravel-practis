@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('companies', \App\Http\Controllers\CompanyController::class);
     Route::resource('companies/{company}/sections', \App\Http\Controllers\SectionController::class);
-    Route::resource('companies/{company}/sections.users', \App\Http\Controllers\SectionUserController::class)->only(['store']);
+    Route::resource('companies/{company}/sections.users', \App\Http\Controllers\SectionUserController::class)->only(['store','destroy']);
 });
 
 require __DIR__ . '/auth.php';

@@ -61,11 +61,12 @@
                             </button>
                         </form>
                         <h3>所属者一覧</h3>
-                        <table>
+                        <table class="table table-striped">
                             <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -73,6 +74,16 @@
                                 <tr>
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
+                                    <td>
+                                        <form style="display:inline"
+                                              action="{{ route('sections.users.destroy', ['company' => $company->id, 'section' => $section->id, 'user' => $user->id]) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">
+                                                {{ __('削除') }}
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
