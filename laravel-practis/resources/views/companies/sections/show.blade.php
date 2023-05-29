@@ -6,6 +6,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                @include('layouts/message')
                 <div class="card">
                     <h2 class="card-header">部署情報　詳細</h2>
                     <div class="card-body">
@@ -76,7 +77,8 @@
                                     <td>{{ $user->name }}</td>
                                     <td>
                                         <form style="display:inline"
-                                              action="{{ route('sections.users.destroy', ['company' => $company->id, 'section' => $section->id, 'user' => $user->id]) }}" method="post">
+                                              action="{{ route('sections.users.destroy', ['company' => $company->id, 'section' => $section->id, 'user' => $user->id]) }}"
+                                              method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use App\Models\Section;
 
 class StoreSectionUserRequest extends FormRequest
@@ -23,7 +24,12 @@ class StoreSectionUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'exists:users,id'],
+            'user_id' => [
+                'required',
+                'exists:users,id',
+                Rule::unique('section_user')->where(function ($query) {
+                return $query->where('section_id', $this->section->id);
+            }),],
         ];
     }
 }
