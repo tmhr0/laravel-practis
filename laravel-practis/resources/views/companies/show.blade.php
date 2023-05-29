@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <h2 class="card-header">会社情報　詳細</h2>
+                    <h2 class="card-header">{{ __('会社情報　詳細') }}</h2>
                     <div class="card-body">
                         @csrf
                         <div class="form-group row">

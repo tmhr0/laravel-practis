@@ -8,13 +8,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="container">
                 <div class="card">
-                    <h1 class="card-header">会社 一覧ページ</h1>
+                    <h1 class="card-header">{{ __('会社 一覧ページ') }}</h1>
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>会社名</th>
-                            <th>作成日</th>
+                            <th>{{ __('ID') }}</th>
+                            <th>{{ __('会社名') }}</th>
+                            <th>{{ __('作成日') }}</th>
                             <th></th>
                             <th></th>
                             <th></th>
