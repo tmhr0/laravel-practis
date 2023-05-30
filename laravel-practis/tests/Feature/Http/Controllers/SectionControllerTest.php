@@ -46,6 +46,9 @@ class SectionControllerTest extends TestCase
 
         // actingAs 指定ユーザーを現在のユーザーとして認証する
         $this->actingAs($this->user)->get($url)->assertStatus(200);
+
+        // 別の会社のユーザーの場合、403になる
+        $this->actingAs($this->user2)->get($url)->assertStatus(403);
     }
 
     public function test_create()
@@ -57,6 +60,9 @@ class SectionControllerTest extends TestCase
 
         // actingAs 指定ユーザーを現在のユーザーとして認証する
         $this->actingAs($this->user)->get($url)->assertStatus(200);
+
+        // 別の会社のユーザーの場合、403になる
+        $this->actingAs($this->user2)->get($url)->assertStatus(403);
     }
 
     public function test_store()
@@ -72,6 +78,9 @@ class SectionControllerTest extends TestCase
         $response = $this->actingAs($this->user)->post($url, ['name' => $section_name]);
 
         $response->assertStatus(302);
+
+        // 別の会社のユーザーの場合、403になる
+        $this->actingAs($this->user2)->get($url)->assertStatus(403);
 
         // 登録データが存在しているかを確認する
         $this->assertDatabaseHas('sections', ['company_id' => $company, 'name' => $section_name]);
@@ -102,6 +111,9 @@ class SectionControllerTest extends TestCase
 
         $response = $this->actingAs($this->user)->get($url);
         $response->assertStatus(200);
+
+        // 別の会社のユーザーの場合、403になる
+        $this->actingAs($this->user2)->get($url)->assertStatus(403);
     }
 
     public function test_edit(): void
@@ -113,6 +125,9 @@ class SectionControllerTest extends TestCase
 
         $response = $this->actingAs($this->user)->get($url);
         $response->assertStatus(200);
+
+        // 別の会社のユーザーの場合、403になる
+        $this->actingAs($this->user2)->get($url)->assertStatus(403);
     }
 
     public function test_update()
@@ -132,6 +147,9 @@ class SectionControllerTest extends TestCase
 
         // 登録データが存在しているかを確認する
         $this->assertDatabaseHas('sections', ['name' => $section_name]);
+
+        // 別の会社のユーザーの場合、403になる
+        $this->actingAs($this->user2)->get($url)->assertStatus(403);
 
         // バリデーションの表示確認
         $this->actingAs($this->user)->put($url, ['name' => null]);
