@@ -19,10 +19,13 @@ class CompanyControllerTest extends TestCase
     {
         parent::setUp();
         // 事前にテスト用データを作成
-        $this->companies = Company::factory()->count(3)->create();
+        $this->companies = Company::factory()->count(2)->create();
         // 最初にcreateした会社データを設定
         $this->company = $this->companies->first();
         $this->user = User::factory(['company_id' => $this->company->id])->create();
+        // 最後にcreateした会社データを設定
+        $this->company = $this->companies->last();
+        $this->user2 = User::factory(['company_id' => $this->company->id])->create();
     }
 
     public function test_index()
@@ -76,28 +79,33 @@ class CompanyControllerTest extends TestCase
 
     public function test_show()
     {
-        $url = route('companies.show', $this->companies->random()->first()->id);
+        $url = route('companies.show', $this->companies->first()->id);
 
         // ゲストのときは、loginページにリダイレクトされる
         $this->get($url)->assertRedirect(route('login'));
 
         $this->actingAs($this->user)->get($url)->assertStatus(200);
 
+        // 別の会社のユーザーの場合、403になる
+        $this->actingAs($this->user2)->get($url)->assertStatus(403);
     }
 
     public function test_edit()
     {
-        $url = route('companies.edit', $this->companies->random()->first()->id);
+        $url = route('companies.edit', $this->companies->first()->id);
 
         // ゲストのときは、loginページにリダイレクトされる
         $this->get($url)->assertRedirect(route('login'));
 
-        $this->actingAs($this->user)->get($url)->assertStatus(200);;
+        $this->actingAs($this->user)->get($url)->assertStatus(200);
+
+        // 別の会社のユーザーの場合、403になる
+        $this->actingAs($this->user2)->get($url)->assertStatus(403);
     }
 
     public function test_update()
     {
-        $company = $this->companies->random()->first();
+        $company = $this->companies->first();
 
         $company_name = $this->faker->company;
 
@@ -107,6 +115,12 @@ class CompanyControllerTest extends TestCase
         $this->put($url, [
             'name' => $company_name,
         ])->assertRedirect(route('login'));
+
+        // 別の会社のユーザーの場合、403になる
+        $this->actingAs($this->user2)
+            ->put($url, [
+                'name' => $company_name,
+            ])->assertStatus(403);;
 
         $response = $this->actingAs($this->user)
             ->put($url, [
@@ -126,12 +140,15 @@ class CompanyControllerTest extends TestCase
 
     public function test_destroy()
     {
-        $company = $this->companies->random()->first();
+        $company = $this->companies->first();
 
         $url = route('companies.destroy', $company->id);
 
         // ゲストのときは、loginページにリダイレクトされる
         $this->delete($url)->assertRedirect(route('login'));
+
+        // 別の会社のユーザーの場合、403になる
+        $this->actingAs($this->user2)->get($url)->assertStatus(403);
 
         $response = $this->actingAs($this->user)->delete($url);
 
