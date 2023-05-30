@@ -19,8 +19,10 @@ class CompanyControllerTest extends TestCase
     {
         parent::setUp();
         // 事前にテスト用データを作成
-        $this->companies = Company::factory()->count(20)->create();
-        $this->user = User::factory()->create();
+        $this->companies = Company::factory()->count(3)->create();
+        // 最初にcreateした会社データを設定
+        $this->company = $this->companies->first();
+        $this->user = User::factory(['company_id' => $this->company->id])->create();
     }
 
     public function test_index()
@@ -79,24 +81,18 @@ class CompanyControllerTest extends TestCase
         // ゲストのときは、loginページにリダイレクトされる
         $this->get($url)->assertRedirect(route('login'));
 
-        $response = $this->actingAs($this->user)->get($url);
+        $this->actingAs($this->user)->get($url)->assertStatus(200);
 
-        $response->assertStatus(200);
     }
 
     public function test_edit()
     {
-        $company = $this->companies->random()->first();
-
-        $url = route('companies.edit', $company->id);
+        $url = route('companies.edit', $this->companies->random()->first()->id);
 
         // ゲストのときは、loginページにリダイレクトされる
         $this->get($url)->assertRedirect(route('login'));
 
-        $response = $this->actingAs($this->user)
-            ->get($url);
-
-        $response->assertStatus(200);
+        $this->actingAs($this->user)->get($url)->assertStatus(200);;
     }
 
     public function test_update()
