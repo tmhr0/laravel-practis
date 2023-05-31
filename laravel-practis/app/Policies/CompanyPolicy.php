@@ -4,32 +4,26 @@ namespace App\Policies;
 
 use App\Models\Company;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CompanyPolicy
 {
+    use HandlesAuthorization;
+
     /**
-     * Determine whether the user can view any models.
+     * Determine whether the user can show the model.
      */
-    public function viewAny(User $user): bool
+    public function show(User $user, Company $company): bool
     {
-        //
+        return $user->company->id === $company->id;
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Determine whether the user can edit the model.
      */
-    public function view(User $user, Company $company): bool
+    public function edit(User $user, Company $company): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
-    {
-        //
+        return $user->company->id === $company->id;
     }
 
     /**
@@ -37,7 +31,7 @@ class CompanyPolicy
      */
     public function update(User $user, Company $company): bool
     {
-        //
+        return $user->company->id === $company->id;
     }
 
     /**
@@ -45,22 +39,6 @@ class CompanyPolicy
      */
     public function delete(User $user, Company $company): bool
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Company $company): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Company $company): bool
-    {
-        //
+        return $user->company->id === $company->id;
     }
 }
